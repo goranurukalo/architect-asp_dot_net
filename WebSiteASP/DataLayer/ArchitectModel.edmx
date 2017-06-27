@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ArchitectDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="idImage" />
+          </Key>
+          <Property Name="idImage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProject" Type="int" Nullable="false" />
+          <Property Name="smallPictureUrl" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="bigPictureUrl" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="imgAlt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="imageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="link" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PollAnswers">
+          <Key>
+            <PropertyRef Name="idPollAnswer" />
+          </Key>
+          <Property Name="idPollAnswer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPollQuestion" Type="int" Nullable="false" />
+          <Property Name="answer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PollQuestions">
+          <Key>
+            <PropertyRef Name="idPollQuestion" />
+          </Key>
+          <Property Name="idPollQuestion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PollVotes">
+          <Key>
+            <PropertyRef Name="idPollVote" />
+          </Key>
+          <Property Name="idPollVote" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ipAddress" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="idAnswer" Type="int" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="idProject" />
+          </Key>
+          <Property Name="idProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tag" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="timeOfPost" Type="datetime" Nullable="false" />
+          <Property Name="lastTimeChanged" Type="datetime" Nullable="false" />
+          <Property Name="numberOfLikes" Type="int" Nullable="false" />
+          <Property Name="mainImageLink" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="idRole" />
+          </Key>
+          <Property Name="idRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
+          <Property Name="timeOfRegistration" Type="datetime" Nullable="false" />
+          <Property Name="verificationCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="idLastUserChange" Type="int" />
+          <Property Name="LastTimeChange" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Images_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="idProject" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="idProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswers_PollQuestions">
+          <End Role="PollQuestions" Type="Self.PollQuestions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollAnswers" Type="Self.PollAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollQuestions">
+              <PropertyRef Name="idPollQuestion" />
+            </Principal>
+            <Dependent Role="PollAnswers">
+              <PropertyRef Name="idPollQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVotes_PollAnswers">
+          <End Role="PollAnswers" Type="Self.PollAnswers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollVotes" Type="Self.PollVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswers">
+              <PropertyRef Name="idPollAnswer" />
+            </Principal>
+            <Dependent Role="PollVotes">
+              <PropertyRef Name="idAnswer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spDeleteImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idImage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idMenu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeletePollAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPollAnswer" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeletePollQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPollQuestion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProject" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idRole" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInserteMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="link" Type="nvarchar" Mode="In" />
+          <Parameter Name="idRole" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProject" Type="int" Mode="In" />
+          <Parameter Name="smallPicURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="bigPicURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="imgAlt" Type="nvarchar" Mode="In" />
+          <Parameter Name="imageName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertPollAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPollQuestion" Type="int" Mode="In" />
+          <Parameter Name="answer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertPollQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="question" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertPollVote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ipAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="idAnswer" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="tag" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="mainImageLink" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roleName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="statusName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="verificationCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="idRole" Type="int" Mode="In" />
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idImage" Type="int" Mode="In" />
+          <Parameter Name="smallPicURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="bigPicURL" Type="nvarchar" Mode="In" />
+          <Parameter Name="imgAlt" Type="nvarchar" Mode="In" />
+          <Parameter Name="imageName" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateImageWithoutImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idImage" Type="int" Mode="In" />
+          <Parameter Name="imgAlt" Type="nvarchar" Mode="In" />
+          <Parameter Name="imageName" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idMenu" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="link" Type="nvarchar" Mode="In" />
+          <Parameter Name="idRole" Type="int" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdatePollAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPollAnswer" Type="int" Mode="In" />
+          <Parameter Name="answer" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdatePollQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPollQuestion" Type="int" Mode="In" />
+          <Parameter Name="question" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProject" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="tag" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="numberOfLikes" Type="int" Mode="In" />
+          <Parameter Name="mainImageLink" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateProjectWithImg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProject" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="tag" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="mainImageLink" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateProjectWithoutImg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProject" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="tag" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idRole" Type="int" Mode="In" />
+          <Parameter Name="roleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+          <Parameter Name="statusName" Type="nvarchar" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="idRole" Type="int" Mode="In" />
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateUserNoPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="int" Mode="In" />
+          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="idRole" Type="int" Mode="In" />
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+          <Parameter Name="idLastUser" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ArchitectDatabaseModelStoreContainer">
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollAnswers" EntityType="Self.PollAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollQuestions" EntityType="Self.PollQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollVotes" EntityType="Self.PollVotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Images_Projects" Association="Self.FK_Images_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Roles" Association="Self.FK_Menu_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswers_PollQuestions" Association="Self.FK_PollAnswers_PollQuestions">
+            <End Role="PollQuestions" EntitySet="PollQuestions" />
+            <End Role="PollAnswers" EntitySet="PollAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVotes_PollAnswers" Association="Self.FK_PollVotes_PollAnswers">
+            <End Role="PollAnswers" EntitySet="PollAnswers" />
+            <End Role="PollVotes" EntitySet="PollVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users" Association="Self.FK_Projects_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Status" Association="Self.FK_Users_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArchitectDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="idImage" />
+          </Key>
+          <Property Name="idImage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProject" Type="Int32" Nullable="false" />
+          <Property Name="smallPictureUrl" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bigPictureUrl" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="imgAlt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="imageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Images_Projects" FromRole="Images" ToRole="Projects" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="idPollAnswer" />
+          </Key>
+          <Property Name="idPollAnswer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPollQuestion" Type="Int32" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PollQuestion" Relationship="Self.FK_PollAnswers_PollQuestions" FromRole="PollAnswers" ToRole="PollQuestions" />
+          <NavigationProperty Name="PollVotes" Relationship="Self.FK_PollVotes_PollAnswers" FromRole="PollAnswers" ToRole="PollVotes" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PollQuestion">
+          <Key>
+            <PropertyRef Name="idPollQuestion" />
+          </Key>
+          <Property Name="idPollQuestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PollAnswers" Relationship="Self.FK_PollAnswers_PollQuestions" FromRole="PollQuestions" ToRole="PollAnswers" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PollVote">
+          <Key>
+            <PropertyRef Name="idPollVote" />
+          </Key>
+          <Property Name="idPollVote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ipAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idAnswer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PollAnswer" Relationship="Self.FK_PollVotes_PollAnswers" FromRole="PollVotes" ToRole="PollAnswers" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="idProject" />
+          </Key>
+          <Property Name="idProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="timeOfPost" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastTimeChanged" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="numberOfLikes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Images_Projects" FromRole="Projects" ToRole="Images" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Projects_Users" FromRole="Projects" ToRole="Users" />
+          <Property Name="mainImageLink" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="idRole" />
+          </Key>
+          <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+          <NavigationProperty Name="Menus" Relationship="ArchitectDatabaseModel.FK_Menu_Roles" FromRole="Role" ToRole="Menu" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Status" FromRole="Status" ToRole="Users" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
+          <Property Name="timeOfRegistration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="verificationCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Users" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Users_Status" FromRole="Users" ToRole="Status" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Images_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Images" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="idProject" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="idProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswers_PollQuestions">
+          <End Role="PollQuestions" Type="Self.PollQuestion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollAnswers" Type="Self.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollQuestions">
+              <PropertyRef Name="idPollQuestion" />
+            </Principal>
+            <Dependent Role="PollAnswers">
+              <PropertyRef Name="idPollQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollVotes_PollAnswers">
+          <End Role="PollAnswers" Type="Self.PollAnswer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollVotes" Type="Self.PollVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswers">
+              <PropertyRef Name="idPollAnswer" />
+            </Principal>
+            <Dependent Role="PollVotes">
+              <PropertyRef Name="idAnswer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArchitectDatabaseEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="PollAnswers" EntityType="Self.PollAnswer" />
+          <EntitySet Name="PollQuestions" EntityType="Self.PollQuestion" />
+          <EntitySet Name="PollVotes" EntityType="Self.PollVote" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Images_Projects" Association="Self.FK_Images_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswers_PollQuestions" Association="Self.FK_PollAnswers_PollQuestions">
+            <End Role="PollQuestions" EntitySet="PollQuestions" />
+            <End Role="PollAnswers" EntitySet="PollAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollVotes_PollAnswers" Association="Self.FK_PollVotes_PollAnswers">
+            <End Role="PollAnswers" EntitySet="PollAnswers" />
+            <End Role="PollVotes" EntitySet="PollVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users" Association="Self.FK_Projects_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Status" Association="Self.FK_Users_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="spDeleteImage">
+          <Parameter Name="idImage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeletePollAnswer">
+          <Parameter Name="idPollAnswer" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeletePollQuestion">
+          <Parameter Name="idPollQuestion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteProject">
+          <Parameter Name="idProject" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteUser">
+          <Parameter Name="idUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertImage">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="smallPicURL" Mode="In" Type="String" />
+            <Parameter Name="bigPicURL" Mode="In" Type="String" />
+            <Parameter Name="imgAlt" Mode="In" Type="String" />
+            <Parameter Name="imageName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertPollAnswer">
+            <Parameter Name="idPollQuestion" Mode="In" Type="Int32" />
+            <Parameter Name="answer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertPollQuestion">
+          <Parameter Name="question" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertPollVote">
+            <Parameter Name="ipAddress" Mode="In" Type="String" />
+            <Parameter Name="idAnswer" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertProject">
+            <Parameter Name="idUser" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="mainImageLink" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateImage">
+            <Parameter Name="idImage" Mode="In" Type="Int32" />
+            <Parameter Name="smallPicURL" Mode="In" Type="String" />
+            <Parameter Name="bigPicURL" Mode="In" Type="String" />
+            <Parameter Name="imgAlt" Mode="In" Type="String" />
+            <Parameter Name="imageName" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdatePollAnswer">
+            <Parameter Name="idPollAnswer" Mode="In" Type="Int32" />
+            <Parameter Name="answer" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdatePollQuestion">
+            <Parameter Name="idPollQuestion" Mode="In" Type="Int32" />
+            <Parameter Name="question" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateProject">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="numberOfLikes" Mode="In" Type="Int32" />
+            <Parameter Name="mainImageLink" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateUser">
+            <Parameter Name="idUser" Mode="In" Type="Int32" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUserDislikedProject">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="idProjectLik" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUserLikedProject">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="idUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertUser">
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="verificationCode" Mode="In" Type="String" />
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Menus" EntityType="ArchitectDatabaseModel.Menu" />
+          <AssociationSet Name="FK_Menu_Roles" Association="ArchitectDatabaseModel.FK_Menu_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
+          <FunctionImport Name="spUpdateProjectWithImg">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="mainImageLink" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateProjectWithoutImg">
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteMenu">
+          <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateMenu">
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="link" Mode="In" Type="String" />
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInserteMenu">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="link" Mode="In" Type="String" />
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteRole">
+          <Parameter Name="idRole" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertRole">
+          <Parameter Name="roleName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateRole">
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+            <Parameter Name="roleName" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteStatus">
+          <Parameter Name="idStatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertStatus">
+          <Parameter Name="statusName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateStatus">
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+            <Parameter Name="statusName" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateUserNoPassword">
+            <Parameter Name="idUser" Mode="In" Type="Int32" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="idRole" Mode="In" Type="Int32" />
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateImageWithoutImage">
+            <Parameter Name="idImage" Mode="In" Type="Int32" />
+            <Parameter Name="imgAlt" Mode="In" Type="String" />
+            <Parameter Name="imageName" Mode="In" Type="String" />
+            <Parameter Name="idLastUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="link" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="ArchitectDatabaseModel.FK_Menu_Roles" FromRole="Menu" ToRole="Role" />
+          <Property Name="idLastUserChange" Type="Int32" />
+          <Property Name="LastTimeChange" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Menu_Roles">
+          <End Type="ArchitectDatabaseModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="ArchitectDatabaseModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArchitectDatabaseModelStoreContainer" CdmEntityContainer="ArchitectDatabaseEntities">
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idImage" ColumnName="idImage" />
+                <ScalarProperty Name="idProject" ColumnName="idProject" />
+                <ScalarProperty Name="smallPictureUrl" ColumnName="smallPictureUrl" />
+                <ScalarProperty Name="bigPictureUrl" ColumnName="bigPictureUrl" />
+                <ScalarProperty Name="imgAlt" ColumnName="imgAlt" />
+                <ScalarProperty Name="imageName" ColumnName="imageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollAnswers">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollAnswer">
+              <MappingFragment StoreEntitySet="PollAnswers">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idPollAnswer" ColumnName="idPollAnswer" />
+                <ScalarProperty Name="idPollQuestion" ColumnName="idPollQuestion" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollQuestions">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollQuestion">
+              <MappingFragment StoreEntitySet="PollQuestions">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idPollQuestion" ColumnName="idPollQuestion" />
+                <ScalarProperty Name="question" ColumnName="question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollVotes">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollVote">
+              <MappingFragment StoreEntitySet="PollVotes">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idPollVote" ColumnName="idPollVote" />
+                <ScalarProperty Name="ipAddress" ColumnName="ipAddress" />
+                <ScalarProperty Name="idAnswer" ColumnName="idAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="mainImageLink" ColumnName="mainImageLink" />
+                <ScalarProperty Name="idProject" ColumnName="idProject" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="timeOfPost" ColumnName="timeOfPost" />
+                <ScalarProperty Name="lastTimeChanged" ColumnName="lastTimeChanged" />
+                <ScalarProperty Name="numberOfLikes" ColumnName="numberOfLikes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="statusName" ColumnName="statusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="timeOfRegistration" ColumnName="timeOfRegistration" />
+                <ScalarProperty Name="verificationCode" ColumnName="verificationCode" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spDeleteImage" FunctionName="ArchitectDatabaseModel.Store.spDeleteImage" />
+          <FunctionImportMapping FunctionImportName="spDeletePollAnswer" FunctionName="ArchitectDatabaseModel.Store.spDeletePollAnswer" />
+          <FunctionImportMapping FunctionImportName="spDeletePollQuestion" FunctionName="ArchitectDatabaseModel.Store.spDeletePollQuestion" />
+          <FunctionImportMapping FunctionImportName="spDeleteProject" FunctionName="ArchitectDatabaseModel.Store.spDeleteProject" />
+          <FunctionImportMapping FunctionImportName="spDeleteUser" FunctionName="ArchitectDatabaseModel.Store.spDeleteUser" />
+          <FunctionImportMapping FunctionImportName="spInsertImage" FunctionName="ArchitectDatabaseModel.Store.spInsertImage" />
+          <FunctionImportMapping FunctionImportName="spInsertPollAnswer" FunctionName="ArchitectDatabaseModel.Store.spInsertPollAnswer" />
+          <FunctionImportMapping FunctionImportName="spInsertPollQuestion" FunctionName="ArchitectDatabaseModel.Store.spInsertPollQuestion" />
+          <FunctionImportMapping FunctionImportName="spInsertPollVote" FunctionName="ArchitectDatabaseModel.Store.spInsertPollVote" />
+          <FunctionImportMapping FunctionImportName="spInsertProject" FunctionName="ArchitectDatabaseModel.Store.spInsertProject" />
+          <FunctionImportMapping FunctionImportName="spUpdateImage" FunctionName="ArchitectDatabaseModel.Store.spUpdateImage" />
+          <FunctionImportMapping FunctionImportName="spUpdatePollAnswer" FunctionName="ArchitectDatabaseModel.Store.spUpdatePollAnswer" />
+          <FunctionImportMapping FunctionImportName="spUpdatePollQuestion" FunctionName="ArchitectDatabaseModel.Store.spUpdatePollQuestion" />
+          <FunctionImportMapping FunctionImportName="spUpdateProject" FunctionName="ArchitectDatabaseModel.Store.spUpdateProject" />
+          <FunctionImportMapping FunctionImportName="spUpdateUser" FunctionName="ArchitectDatabaseModel.Store.spUpdateUser" />
+          <FunctionImportMapping FunctionImportName="spInsertUser" FunctionName="ArchitectDatabaseModel.Store.spInsertUser" />
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="ArchitectDatabaseModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+                <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spUpdateProjectWithImg" FunctionName="ArchitectDatabaseModel.Store.spUpdateProjectWithImg" />
+          <FunctionImportMapping FunctionImportName="spUpdateProjectWithoutImg" FunctionName="ArchitectDatabaseModel.Store.spUpdateProjectWithoutImg" />
+          <FunctionImportMapping FunctionImportName="spDeleteMenu" FunctionName="ArchitectDatabaseModel.Store.spDeleteMenu" />
+          <FunctionImportMapping FunctionImportName="spUpdateMenu" FunctionName="ArchitectDatabaseModel.Store.spUpdateMenu" />
+          <FunctionImportMapping FunctionImportName="spInserteMenu" FunctionName="ArchitectDatabaseModel.Store.spInserteMenu" />
+          <FunctionImportMapping FunctionImportName="spDeleteRole" FunctionName="ArchitectDatabaseModel.Store.spDeleteRole" />
+          <FunctionImportMapping FunctionImportName="spInsertRole" FunctionName="ArchitectDatabaseModel.Store.spInsertRole" />
+          <FunctionImportMapping FunctionImportName="spUpdateRole" FunctionName="ArchitectDatabaseModel.Store.spUpdateRole" />
+          <FunctionImportMapping FunctionImportName="spDeleteStatus" FunctionName="ArchitectDatabaseModel.Store.spDeleteStatus" />
+          <FunctionImportMapping FunctionImportName="spInsertStatus" FunctionName="ArchitectDatabaseModel.Store.spInsertStatus" />
+          <FunctionImportMapping FunctionImportName="spUpdateStatus" FunctionName="ArchitectDatabaseModel.Store.spUpdateStatus" />
+          <FunctionImportMapping FunctionImportName="spUpdateUserNoPassword" FunctionName="ArchitectDatabaseModel.Store.spUpdateUserNoPassword" />
+          <FunctionImportMapping FunctionImportName="spUpdateImageWithoutImage" FunctionName="ArchitectDatabaseModel.Store.spUpdateImageWithoutImage" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

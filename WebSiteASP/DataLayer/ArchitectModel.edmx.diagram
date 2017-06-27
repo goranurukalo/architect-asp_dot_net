@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb2ca8bbf1df4d5b8c513d207d614652" Name="Diagram1">
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.Image" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.PollAnswer" Width="1.5" PointX="10" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.PollQuestion" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.PollVote" Width="1.5" PointX="12.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.Project" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.Role" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.Status" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.User" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_Images_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_PollAnswers_PollQuestions" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_PollVotes_PollAnswers" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_Projects_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_Users_Status" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ArchitectDatabaseModel.Menu" Width="1.5" PointX="3" PointY="7.625" />
+        <AssociationConnector Association="ArchitectDatabaseModel.FK_Menu_Roles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

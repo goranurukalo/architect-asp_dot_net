@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ArchitectDatabaseModelStoreContainer" CdmEntityContainer="ArchitectDatabaseEntities">
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.Image">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idImage" ColumnName="idImage" />
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="smallPictureUrl" ColumnName="smallPictureUrl" />
+          <ScalarProperty Name="bigPictureUrl" ColumnName="bigPictureUrl" />
+          <ScalarProperty Name="imgAlt" ColumnName="imgAlt" />
+          <ScalarProperty Name="imageName" ColumnName="imageName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PollAnswers">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollAnswer">
+        <MappingFragment StoreEntitySet="PollAnswers">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idPollAnswer" ColumnName="idPollAnswer" />
+          <ScalarProperty Name="idPollQuestion" ColumnName="idPollQuestion" />
+          <ScalarProperty Name="answer" ColumnName="answer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PollQuestions">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollQuestion">
+        <MappingFragment StoreEntitySet="PollQuestions">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idPollQuestion" ColumnName="idPollQuestion" />
+          <ScalarProperty Name="question" ColumnName="question" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PollVotes">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.PollVote">
+        <MappingFragment StoreEntitySet="PollVotes">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idPollVote" ColumnName="idPollVote" />
+          <ScalarProperty Name="ipAddress" ColumnName="ipAddress" />
+          <ScalarProperty Name="idAnswer" ColumnName="idAnswer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="mainImageLink" ColumnName="mainImageLink" />
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="tag" ColumnName="tag" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="timeOfPost" ColumnName="timeOfPost" />
+          <ScalarProperty Name="lastTimeChanged" ColumnName="lastTimeChanged" />
+          <ScalarProperty Name="numberOfLikes" ColumnName="numberOfLikes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="timeOfRegistration" ColumnName="timeOfRegistration" />
+          <ScalarProperty Name="verificationCode" ColumnName="verificationCode" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spDeleteImage" FunctionName="ArchitectDatabaseModel.Store.spDeleteImage" />
+    <FunctionImportMapping FunctionImportName="spDeletePollAnswer" FunctionName="ArchitectDatabaseModel.Store.spDeletePollAnswer" />
+    <FunctionImportMapping FunctionImportName="spDeletePollQuestion" FunctionName="ArchitectDatabaseModel.Store.spDeletePollQuestion" />
+    <FunctionImportMapping FunctionImportName="spDeleteProject" FunctionName="ArchitectDatabaseModel.Store.spDeleteProject" />
+    <FunctionImportMapping FunctionImportName="spDeleteUser" FunctionName="ArchitectDatabaseModel.Store.spDeleteUser" />
+    <FunctionImportMapping FunctionImportName="spInsertImage" FunctionName="ArchitectDatabaseModel.Store.spInsertImage" />
+    <FunctionImportMapping FunctionImportName="spInsertPollAnswer" FunctionName="ArchitectDatabaseModel.Store.spInsertPollAnswer" />
+    <FunctionImportMapping FunctionImportName="spInsertPollQuestion" FunctionName="ArchitectDatabaseModel.Store.spInsertPollQuestion" />
+    <FunctionImportMapping FunctionImportName="spInsertPollVote" FunctionName="ArchitectDatabaseModel.Store.spInsertPollVote" />
+    <FunctionImportMapping FunctionImportName="spInsertProject" FunctionName="ArchitectDatabaseModel.Store.spInsertProject" />
+    <FunctionImportMapping FunctionImportName="spUpdateImage" FunctionName="ArchitectDatabaseModel.Store.spUpdateImage" />
+    <FunctionImportMapping FunctionImportName="spUpdatePollAnswer" FunctionName="ArchitectDatabaseModel.Store.spUpdatePollAnswer" />
+    <FunctionImportMapping FunctionImportName="spUpdatePollQuestion" FunctionName="ArchitectDatabaseModel.Store.spUpdatePollQuestion" />
+    <FunctionImportMapping FunctionImportName="spUpdateProject" FunctionName="ArchitectDatabaseModel.Store.spUpdateProject" />
+    <FunctionImportMapping FunctionImportName="spUpdateUser" FunctionName="ArchitectDatabaseModel.Store.spUpdateUser" />
+    <FunctionImportMapping FunctionImportName="spInsertUser" FunctionName="ArchitectDatabaseModel.Store.spInsertUser" />
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="ArchitectDatabaseModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="LastTimeChange" ColumnName="LastTimeChange" />
+          <ScalarProperty Name="idLastUserChange" ColumnName="idLastUserChange" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spUpdateProjectWithImg" FunctionName="ArchitectDatabaseModel.Store.spUpdateProjectWithImg" />
+    <FunctionImportMapping FunctionImportName="spUpdateProjectWithoutImg" FunctionName="ArchitectDatabaseModel.Store.spUpdateProjectWithoutImg" />
+    <FunctionImportMapping FunctionImportName="spDeleteMenu" FunctionName="ArchitectDatabaseModel.Store.spDeleteMenu" />
+    <FunctionImportMapping FunctionImportName="spUpdateMenu" FunctionName="ArchitectDatabaseModel.Store.spUpdateMenu" />
+    <FunctionImportMapping FunctionImportName="spInserteMenu" FunctionName="ArchitectDatabaseModel.Store.spInserteMenu" />
+    <FunctionImportMapping FunctionImportName="spDeleteRole" FunctionName="ArchitectDatabaseModel.Store.spDeleteRole" />
+    <FunctionImportMapping FunctionImportName="spInsertRole" FunctionName="ArchitectDatabaseModel.Store.spInsertRole" />
+    <FunctionImportMapping FunctionImportName="spUpdateRole" FunctionName="ArchitectDatabaseModel.Store.spUpdateRole" />
+    <FunctionImportMapping FunctionImportName="spDeleteStatus" FunctionName="ArchitectDatabaseModel.Store.spDeleteStatus" />
+    <FunctionImportMapping FunctionImportName="spInsertStatus" FunctionName="ArchitectDatabaseModel.Store.spInsertStatus" />
+    <FunctionImportMapping FunctionImportName="spUpdateStatus" FunctionName="ArchitectDatabaseModel.Store.spUpdateStatus" />
+    <FunctionImportMapping FunctionImportName="spUpdateUserNoPassword" FunctionName="ArchitectDatabaseModel.Store.spUpdateUserNoPassword" />
+    <FunctionImportMapping FunctionImportName="spUpdateImageWithoutImage" FunctionName="ArchitectDatabaseModel.Store.spUpdateImageWithoutImage" />
+  </EntityContainerMapping>
+</Mapping>
